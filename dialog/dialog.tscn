@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/VT323.tres" type="DynamicFont" id=1]
+[ext_resource path="res://dialog/dialog.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ShowDialog"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect/Dialogue:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="DialogNode" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="DialogPopup" type="Popup" parent="."]
+pause_mode = 2
+visible = true
+margin_top = 396.0
+margin_right = 1024.0
+margin_bottom = 604.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="DialogPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="DialogPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -3.99994
+margin_bottom = -3.99998
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialogue" type="Label" parent="DialogPopup/ColorRect"]
+anchor_top = 0.038
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 0.0960002
+margin_right = -8.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 1 )
+text = "This is some test text."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogPopup"]
+anims/ShowDialog = SubResource( 1 )
+[connection signal="animation_finished" from="DialogPopup/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
