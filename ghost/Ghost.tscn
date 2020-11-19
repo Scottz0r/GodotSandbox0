@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ghost/Ghost.gd" type="Script" id=1]
+[ext_resource path="res://sprites/ghost_normal.png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 256, 128 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 26, 37 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}

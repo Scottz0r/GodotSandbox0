@@ -3,8 +3,6 @@ extends CanvasLayer
 var dialog setget dialog_set
 var npc
 
-signal dialog_close
-
 func dialog_set(new_value):
 	# Setter function for the dialogue variable.
 	dialog = new_value
@@ -18,12 +16,14 @@ func open():
 	$DialogPopup/AnimationPlayer.play("ShowDialog")
 
 func close():
-	get_tree().paused = false
+	# Pause for a short amount of time so that the input is cleared and an
+	# interact action is not immediately triggered.
+	yield(get_tree().create_timer(0.100), "timeout")
+	
+	# Hide the dialog and unfreeze the game.
 	$DialogPopup.hide()
-	# TODO: How to do this in many scenes?!
-	# get_tree().root.get_node("Node/Player").set_active()
-	emit_signal("dialog_close")
-
+	get_tree().paused = false
+	
 func _ready():
 	# Disable processing input by default, so this doesn't react to player
 	# input until shown.
@@ -33,7 +33,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	set_process_input(true)
 
 func _input(event):
-	# if event.is_action_pressed("interact"):
 	if Input.is_action_just_released("interact"):
 		set_process_input(false)
 		npc.talk()

@@ -5,12 +5,7 @@ export(float) var speed = 200
 # Movement velocity
 var velocity = Vector2()
 
-var is_active = true
-
-func get_input():
-	if not is_active:
-		return
-	
+func get_input():	
 	velocity = Vector2()
 	if Input.is_action_pressed("up"):
 		velocity.y -= 1
@@ -33,7 +28,7 @@ func _physics_process(delta):
 
 func _input(event):
 	# if event.is_action_pressed("interact"):
-	if is_active and Input.is_action_just_released("interact"):
+	if Input.is_action_just_released("interact"):
 		maybe_interact()
 		
 		# TODO: Raycast collision?
@@ -45,10 +40,5 @@ func _input(event):
 func maybe_interact():
 	for target in $Area2D.get_overlapping_areas():
 		if target.is_in_group("npc"):
-			is_active = false
 			target.talk()
 			break
-
-func set_active():
-	yield(get_tree().create_timer(0.250), "timeout")
-	is_active = true
