@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://fancy_dialog/dialog_action.gd" type="Script" id=1]
+
+[node name="DialogAction" type="Node"]
+script = ExtResource( 1 )

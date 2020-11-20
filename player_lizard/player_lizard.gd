@@ -75,6 +75,12 @@ func _maybe_interact():
 			break
 		elif target.is_in_group("items"):
 			target.interact()
+			break
+		elif target.is_in_group("placeholder"):
+			# TODO: Would need to pass "inventory" for now hack in "coin"
+			var hack_inventory = "coin" if _has_coin else ""
+			target.interact(hack_inventory)
+			break
 
 
 func _injured_timeout():
@@ -89,8 +95,14 @@ func damage():
 
 
 func pickup_object(item):
+	# TODO: probably should make "item" a string or enumeration.
 	if item is Coin:
 		_has_coin_set(true)
+
+
+func remove_item(item):
+	if item == "coin":
+		_has_coin_set(false)
 
 
 func _has_coin_set(new_value):

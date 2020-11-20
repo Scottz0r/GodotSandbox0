@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/VT323-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://fancy_dialog/fancy_dialog.gd" type="Script" id=2]
+[ext_resource path="res://sprites/big_zombie_idle_anim_f0.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "ShowDialog"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackRect/DialogLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="FancyDialog" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="DialogPopup" type="Popup" parent="."]
+visible = true
+anchor_top = 0.68
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="WhiteBorderRect" type="ColorRect" parent="DialogPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlackRect" type="ColorRect" parent="DialogPopup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1020.0
+margin_bottom = 188.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="DialogLabel" type="Label" parent="DialogPopup/BlackRect"]
+margin_left = 188.0
+margin_right = 1016.0
+margin_bottom = 184.0
+custom_fonts/font = SubResource( 1 )
+text = "This is some test text"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="DialogPopup/BlackRect"]
+margin_left = 44.0
+margin_top = 44.0
+margin_right = 136.0
+margin_bottom = 136.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogPopup"]
+anims/ShowDialog = SubResource( 2 )

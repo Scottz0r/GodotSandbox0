@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Bob",
+        "text": "This is some dialog text.",
+        "sprite": "res://sprites/big_zombie_idle_anim_f0.png"
+    },
+    {
+        "name": "Bert",
+        "text": "I'm the second person in this conversation.",
+        "sprite": "res://sprites/skelet_idle_anim_f0.png"
+    }
+]

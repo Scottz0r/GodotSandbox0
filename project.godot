@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Coin",
 "language": "GDScript",
 "path": "res://items/coin/Coin.gd"
+}, {
+"base": "Node",
+"class": "DialogAction",
+"language": "GDScript",
+"path": "res://fancy_dialog/dialog_action.gd"
 } ]
 _global_script_class_icons={
-"Coin": ""
+"Coin": "",
+"DialogAction": ""
 }
 
 [application]
