@@ -3,7 +3,7 @@ extends Area2D
 signal item_taken
 signal dont_have_item
 
-var is_fulfilled = false
+var _is_fulfilled = false
 
 
 func interact(item_type):
@@ -16,7 +16,7 @@ func interact(item_type):
 
 func fulfill():
 	# Once this item is fulfilled, make it fully visible.
-	is_fulfilled = true
+	_is_fulfilled = true
 	$Sprite.modulate.a = 1.0
 
 	# TODO: Need some sort of visual indicator this is a placeholder and not
