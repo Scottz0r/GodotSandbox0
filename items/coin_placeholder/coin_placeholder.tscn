@@ -8,7 +8,7 @@
 [ext_resource path="res://sprites/ui_check.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+extents = Vector2( 8, 8 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -21,7 +21,8 @@ animations = [ {
 [node name="CoinPlaceholder" type="Area2D" groups=[
 "placeholder",
 ]]
-position = Vector2( 4, 4 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 5 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]

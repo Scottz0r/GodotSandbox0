@@ -47,6 +47,11 @@ func _process_input():
 	velocity = velocity.normalized() * speed
 	_set_animation()
 	
+	# If the character is moving, set the directory of the interact ray.
+	if velocity.length() > 0:
+		#$InteractionArea.rotation_degrees = rad2deg(velocity.angle())
+		$InteractionRay.rotation = velocity.angle()
+	
 	if Input.is_action_just_released("interact"):
 		_maybe_interact()
 
@@ -68,19 +73,22 @@ func _set_animation():
 
 
 func _maybe_interact():
-	# TODO: Maybe raycast in direction of movement?
-	for target in $InteractionArea.get_overlapping_areas():
+	# Try to get a target from either interaction rays.
+	#var all_targets = $InteractionArea.get_overlapping_areas()
+	#var target = null
+	#if len(all_targets):
+	#	target = all_targets[0]
+	var target = $InteractionRay.get_collider()
+	
+	if target:
 		if target.is_in_group("npc"):
 			target.talk()
-			break
 		elif target.is_in_group("items"):
 			target.interact()
-			break
 		elif target.is_in_group("placeholder"):
 			# TODO: Would need to pass "inventory" for now hack in "coin"
 			var hack_inventory = "coin" if _has_coin else ""
 			target.interact(hack_inventory)
-			break
 
 
 func _injured_timeout():
